@@ -4,10 +4,13 @@
   "description": "Simple ToDo Application",
   "main": "server.js",
   "scripts": {
-    "build": "docker-compose -f ./environments/dev/docker-compose.yaml build --no-cache",
-    "dev": "npm run build && docker-compose -f ./environments/dev/docker-compose.yaml up --remove-orphans --force-recreate",
-    "start": "node server.js",
-    "build-client": "mkdir -p public && cd client && npm run build-app && cd .."
+    "build-server": "docker-compose -f ./environments/dev/docker-compose.yaml build --no-cache",
+    "build-client": "mkdir -p public && cd client && npm run build-app && cd ..",
+    "docker-build-dev": "npm run build-client && npm run build-server",
+    "docker-run-dev": "docker-compose -f ./environments/dev/docker-compose.yaml up --remove-orphans --force-recreate",
+    "docker-start-dev": "npm run docker-build-dev && npm run docker-run-dev",
+    "dev": "npm run build-server && npm run docker-run-dev",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Nicola Lo Caso <nicola.locaso@gmail.com>",

@@ -3,7 +3,9 @@
 const express = require("express");
 const app = express();
 
-const port = 3000;
+const env = process.env.ENV || "development";
+const port = process.env.PORT || 3000;
+console.log(`Starting todo-app in ${env} on port ${port}`);
 
 app.use(express.static("public"));
 
