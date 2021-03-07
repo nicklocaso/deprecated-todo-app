@@ -1,10 +1,13 @@
 {
   "name": "todo-app",
   "version": "1.0.0",
-  "description": "Simple ToDO Application",
+  "description": "Simple ToDo Application",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "docker-compose -f ./environments/dev/docker-compose.yaml build --no-cache",
+    "dev": "npm run build && docker-compose -f ./environments/dev/docker-compose.yaml up --remove-orphans --force-recreate",
+    "start": "node server.js",
+    "build-client": "mkdir -p public && cd client && npm run build-app && cd .."
   },
   "keywords": [],
   "author": "Nicola Lo Caso <nicola.locaso@gmail.com>",

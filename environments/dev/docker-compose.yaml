@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  mongo:
+    image: mongo
+    container_name: todoapp-mongo
+    networks:
+      - todoapp_network
+    ports:
+      - "27017:27017"
+    volumes:
+      - db:/data/db
+    restart: unless-stopped
+
+  app:
+    build:
+      context: ../../
+      dockerfile: ./environments/dev/Dockerfile
+    image: todoapp-app
+    container_name: todoapp-app
+    env_file:
+      - .env
+    networks:
+      - todoapp_network
+    links:
+      - mongo:mongo
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+volumes:
+  db:
+
+networks:
+  todoapp_network:
+    driver: bridge
+    name: todoapp-bridge
