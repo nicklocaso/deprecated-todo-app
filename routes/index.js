@@ -1,17 +1,8 @@
 "use strict";
 
-const express = require("express");
-const app = express();
+const router = require("express").Router();
 
-app.get("/check-status", (req, res, next) => {
-  const message = "It's working!";
-  console.log(message);
-  res.locals.database.recordEvent({
-    text: "someone checked webapp status",
-    type: "REQUEST",
-  });
-  res.status(200).json({ message });
-  next();
-});
+router.use(require("./debugging"));
+router.use(require("./tasks"));
 
-module.exports = exports = app;
+module.exports = exports = router;

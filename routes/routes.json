@@ -1,0 +1,9 @@
+{
+  "DEBUGGING": {
+    "CHECK_STATUS": "/test/check-status",
+    "THROW_ERROR": "/test/throw-error",
+    "CATCHED_ERROR": "/test/throw-catched-error"
+  },
+  "GET_ALL_TASKS": "/tasks",
+  "CRATE_TASK": "/tasks"
+}
